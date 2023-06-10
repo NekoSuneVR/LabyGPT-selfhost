@@ -1,0 +1,10 @@
+{
+    "labygpt": {
+        "settings": {
+            "name": "LabyGPT",
+            "enabled": {
+                "name": "Enabled"
+            }
+        }
+    }
+}
