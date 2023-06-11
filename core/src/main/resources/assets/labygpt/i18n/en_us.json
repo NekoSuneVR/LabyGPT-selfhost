@@ -4,7 +4,20 @@
             "name": "LabyGPT",
             "enabled": {
                 "name": "Enabled"
+            },
+            "bearer": {
+                "name": "OpenAI API Key"
+            },
+            "shareUsername": {
+                "name": "Share your Username with OpenAI"
             }
+        },
+        "messages": {
+            "noKey": "You have to provide a valid OpenAI API Key!",
+            "noQuery": "You have to enter the text to send to ChatGPT!",
+            "emptyHistory": "The conversation history is already empty!",
+            "requestError": "An error ocurred with the request to OpenAI!",
+            "historyCleared": "The conversation history was successfully cleared!"
         }
     }
 }
