@@ -2,6 +2,8 @@ package com.rappytv.labygpt.commands;
 
 import com.rappytv.labygpt.GPTAddon;
 import com.rappytv.labygpt.api.GPTRequest;
+import com.rappytv.labygpt.commands.subcommands.GPTClearSubCommand;
+import com.rappytv.labygpt.commands.subcommands.GPTHistorySubCommand;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.util.I18n;
 import java.util.Objects;
@@ -15,6 +17,7 @@ public class GPTCommand extends Command {
 
         this.addon = addon;
         withSubCommand(new GPTClearSubCommand());
+        withSubCommand(new GPTHistorySubCommand());
     }
 
     @Override
@@ -37,6 +40,7 @@ public class GPTCommand extends Command {
         );
 
         if(!request.isSuccessful() || request.getOutput() == null) {
+            GPTAddon.queryHistory.remove(GPTAddon.queryHistory.size() - 1);
             displayMessage(GPTAddon.prefix + "§c" + Objects.requireNonNullElseGet(request.getError(), () -> I18n.translate("labygpt.messages.requestError")));
             return true;
         }
