@@ -2,7 +2,6 @@ package com.rappytv.labygpt.api;
 
 import com.google.gson.Gson;
 import com.rappytv.labygpt.GPTAddon;
-import com.rappytv.labygpt.api.ResponseBody.Choice;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -11,7 +10,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.util.ArrayList;
 
 public class GPTRequest {
 

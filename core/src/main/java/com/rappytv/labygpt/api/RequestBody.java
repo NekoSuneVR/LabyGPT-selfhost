@@ -1,6 +1,5 @@
 package com.rappytv.labygpt.api;
 
-import org.spongepowered.tools.obfuscation.struct.Message;
 import java.util.ArrayList;
 
 public class RequestBody {

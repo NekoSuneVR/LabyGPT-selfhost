@@ -12,8 +12,5 @@ public class ResponseBody {
     }
     private static class Error {
         public String message;
-        public String type;
-        public String param;
-        public String code;
     }
 }
