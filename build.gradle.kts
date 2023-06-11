@@ -19,9 +19,9 @@ labyMod {
         namespace = "labygpt"
         displayName = "LabyGPT"
         author = "RappyTV"
-        description = "Communicate with ChatGPT right in your Chat."
+        description = "Communicate with ChatGPT right in your Chat. Powered by OpenAI."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "0.0.1")
+        version = System.getenv().getOrDefault("VERSION", "1.0.0")
     }
 
     minecraft {
