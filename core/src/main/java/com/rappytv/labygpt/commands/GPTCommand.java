@@ -22,7 +22,7 @@ public class GPTCommand extends Command {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        if(addon.configuration().bearer().isEmpty()) {
+        if(addon.configuration().openAI().bearer().isEmpty()) {
             displayMessage(GPTAddon.prefix + "§c" + I18n.translate("labygpt.messages.noKey"));
             return true;
         }
@@ -35,8 +35,8 @@ public class GPTCommand extends Command {
             GPTAddon.queryHistory.clear();
         GPTRequest request = new GPTRequest(
             String.join(" ", arguments),
-            addon.configuration().bearer(),
-            this.addon.configuration().shareUsername() ? labyAPI.getName() : ""
+            addon.configuration().openAI().bearer(),
+            this.addon.configuration().openAI().shareUsername() ? labyAPI.getName() : ""
         );
 
         if(!request.isSuccessful() || request.getOutput() == null) {

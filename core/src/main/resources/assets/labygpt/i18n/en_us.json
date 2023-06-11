@@ -5,11 +5,18 @@
             "enabled": {
                 "name": "Enabled"
             },
-            "bearer": {
-                "name": "OpenAI API Key"
-            },
-            "shareUsername": {
-                "name": "Share your Username with OpenAI"
+            "openAI": {
+                "name": "OpenAI Settings",
+                "bearer": {
+                    "name": "OpenAI API Key"
+                },
+                "bearerHelp": {
+                    "name": "Where do I get an API Key?",
+                    "text": "OpenAI"
+                },
+                "shareUsername": {
+                    "name": "Share your Username with OpenAI"
+                }
             },
             "saveHistory": {
                 "name": "Use chat history",
