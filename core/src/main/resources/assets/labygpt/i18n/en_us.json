@@ -21,6 +21,7 @@
             "noQuery": "You have to enter the text to send to ChatGPT!",
             "emptyHistory": "The conversation history is already empty!",
             "requestError": "An error ocurred with the request to OpenAI!",
+            "invalidBearer": "You didn't provide an API key. You can obtain an API key from https://platform.openai.com/account/api-keys.",
             "historyCleared": "The conversation history was successfully cleared!"
         }
     }

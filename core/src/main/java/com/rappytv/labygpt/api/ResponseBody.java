@@ -10,7 +10,8 @@ public class ResponseBody {
     public static class Choice {
         public GPTMessage message;
     }
-    private static class Error {
+    public static class Error {
         public String message;
+        public String code;
     }
 }

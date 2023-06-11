@@ -2,6 +2,7 @@ package com.rappytv.labygpt.api;
 
 import com.google.gson.Gson;
 import com.rappytv.labygpt.GPTAddon;
+import net.labymod.api.util.I18n;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,12 +14,12 @@ import java.net.http.HttpResponse.BodyHandlers;
 
 public class GPTRequest {
 
-    public final boolean successful;
-    public String output;
+    private boolean successful;
+    private String output;
+    private String error;
 
     public GPTRequest(String query, String key, String username) {
         Gson gson = new Gson();
-        boolean success;
 
         try {
             if(GPTAddon.queryHistory.isEmpty())
@@ -27,7 +28,7 @@ public class GPTRequest {
             RequestBody apiRequestBody = new RequestBody("gpt-3.5-turbo", GPTAddon.queryHistory, username);
 
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:2000"))
+                .uri(new URI("https://api.openai.com/v1/chat/completions"))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + key)
                 .POST(BodyPublishers.ofString(gson.toJson(apiRequestBody)))
@@ -36,19 +37,37 @@ public class GPTRequest {
             HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-            System.out.println(response.body() + " " + response.statusCode());
-
             ResponseBody responseBody = gson.fromJson(response.body(), ResponseBody.class);
+
+            if(responseBody.error != null) {
+                error = responseBody.error.message;
+                if(error.isEmpty() && responseBody.error.code.equals("invalid_api_key"))
+                    error = I18n.translate("labygpt.messages.invalidBearer");
+                successful = false;
+                return;
+            }
+            if(responseBody.choices.size() < 1) {
+                successful = false;
+                return;
+            }
+
             GPTMessage message = responseBody.choices.get(0).message;
             output = message.content.replace("\n\n", "");
             GPTAddon.queryHistory.add(new GPTMessage(message.content, GPTRole.Assistant, "LabyGPT"));
-            System.out.println(GPTAddon.queryHistory);
-            success = true;
+            successful = true;
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
-            success = false;
+            successful = false;
         }
+    }
 
-        successful = success;
+    public boolean isSuccessful() {
+        return successful;
+    }
+    public String getOutput() {
+        return output;
+    }
+    public String getError() {
+        return error;
     }
 }

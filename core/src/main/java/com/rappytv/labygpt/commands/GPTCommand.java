@@ -4,6 +4,7 @@ import com.rappytv.labygpt.GPTAddon;
 import com.rappytv.labygpt.api.GPTRequest;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.util.I18n;
+import java.util.Objects;
 
 public class GPTCommand extends Command {
 
@@ -35,12 +36,12 @@ public class GPTCommand extends Command {
             this.addon.configuration().shareUsername() ? labyAPI.getName() : ""
         );
 
-        if(!request.successful) {
-            displayMessage(GPTAddon.prefix + "§c" + I18n.translate("labygpt.messages.requestError"));
+        if(!request.isSuccessful() || request.getOutput() == null) {
+            displayMessage(GPTAddon.prefix + "§c" + Objects.requireNonNullElseGet(request.getError(), () -> I18n.translate("labygpt.messages.requestError")));
             return true;
         }
 
-        displayMessage(GPTAddon.prefix + "§f" + request.output);
+        displayMessage(GPTAddon.prefix + "§f" + request.getOutput());
         return true;
     }
 }
