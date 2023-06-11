@@ -15,6 +15,8 @@ public class GPTAddonConfig extends AddonConfig {
     private final ConfigProperty<String> bearer = new ConfigProperty<>("");
     @SwitchSetting
     private final ConfigProperty<Boolean> shareUsername = new ConfigProperty<>(true);
+    @SwitchSetting
+    private final ConfigProperty<Boolean> saveHistory = new ConfigProperty<>(true);
 
     @Override
     public ConfigProperty<Boolean> enabled() {
@@ -25,5 +27,8 @@ public class GPTAddonConfig extends AddonConfig {
     }
     public Boolean shareUsername() {
         return shareUsername.get();
+    }
+    public Boolean saveHistory() {
+        return saveHistory.get();
     }
 }

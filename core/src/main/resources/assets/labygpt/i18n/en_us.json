@@ -10,6 +10,10 @@
             },
             "shareUsername": {
                 "name": "Share your Username with OpenAI"
+            },
+            "saveHistory": {
+                "name": "Use chat history",
+                "description": "If turned off every Query will be it's own conversation and won't be related to the previous chat history. You can also clear your conversation history with §b/gpt clear"
             }
         },
         "messages": {

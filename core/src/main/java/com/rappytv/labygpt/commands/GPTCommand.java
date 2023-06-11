@@ -27,10 +27,13 @@ public class GPTCommand extends Command {
             return true;
         }
 
+        if(!addon.configuration().saveHistory())
+            GPTAddon.queryHistory.clear();
         GPTRequest request = new GPTRequest(
             String.join(" ", arguments),
             addon.configuration().bearer(),
-            this.addon.configuration().shareUsername() ? labyAPI.getName() : "");
+            this.addon.configuration().shareUsername() ? labyAPI.getName() : ""
+        );
 
         if(!request.successful) {
             displayMessage(GPTAddon.prefix + "§c" + I18n.translate("labygpt.messages.requestError"));

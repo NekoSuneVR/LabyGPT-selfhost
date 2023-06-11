@@ -27,7 +27,7 @@ public class GPTRequest {
             RequestBody apiRequestBody = new RequestBody("gpt-3.5-turbo", GPTAddon.queryHistory, username);
 
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("https://api.openai.com/v1/chat/completions"))
+                .uri(new URI("http://localhost:2000"))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + key)
                 .POST(BodyPublishers.ofString(gson.toJson(apiRequestBody)))
