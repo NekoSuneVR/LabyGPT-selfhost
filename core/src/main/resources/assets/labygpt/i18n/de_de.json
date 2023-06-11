@@ -1,0 +1,36 @@
+{
+    "labygpt": {
+        "settings": {
+            "name": "LabyGPT",
+            "enabled": {
+                "name": "Aktiviert"
+            },
+            "openAI": {
+                "name": "OpenAI Einstellungen",
+                "bearer": {
+                    "name": "OpenAI API Key"
+                },
+                "bearerHelp": {
+                    "name": "Wo bekomme ich einen API Key her?",
+                    "text": "OpenAI"
+                },
+                "shareUsername": {
+                    "name": "Teile deinen Spielernamen mit OpenAI"
+                }
+            },
+            "saveHistory": {
+                "name": "Konversationsverlauf aktivieren",
+                "description": "Wenn diese Einstellung deaktiviert ist, ist jede Anfrage seine eigene Konversation und wird nicht von vorherigen Nachrichten beeinflusst. Du kannst den Konversationsverlauf auch mit §b/gpt history §feinsehen und mit §b/gpt clear §flöschen."
+            }
+        },
+        "messages": {
+            "noKey": "Du musst einen gültigen OpenAI API Key angeben!",
+            "noQuery": "Du musst angeben, was du ChatGPT senden möchtest!",
+            "alreadyEmptyHistory": "Der Konversationsverlauf ist bereits leer!",
+            "emptyHistory": "Der Konversationsverlauf ist leer!",
+            "requestError": "Bei der Anfrage an OpenAI ist ein Fehler aufgetreten!",
+            "invalidBearer": "Du hast keinen gültigen API Key angegeben. Du kannst einen API Key von §bhttps://platform.openai.com/account/api-keys §cerhalten.",
+            "historyCleared": "Der Konversationsverlauf wurde erfolgreich geleert!"
+        }
+    }
+}
