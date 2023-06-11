@@ -19,8 +19,8 @@
                 }
             },
             "saveHistory": {
-                "name": "Use chat history",
-                "description": "If turned off every Query will be it's own conversation and won't be related to the previous chat history. You can also clear your conversation history with §b/gpt clear"
+                "name": "Save conversation history",
+                "description": "If turned off every Query will be it's own conversation and won't be related to the previous chat history. You can also view your conversation history with §b/gpt history §fand clear it with §b/gpt clear§f!"
             }
         },
         "messages": {
@@ -29,7 +29,7 @@
             "alreadyEmptyHistory": "The conversation history is already empty!",
             "emptyHistory": "The conversation history is empty!",
             "requestError": "An error ocurred with the request to OpenAI!",
-            "invalidBearer": "You didn't provide an API key. You can obtain an API key from https://platform.openai.com/account/api-keys.",
+            "invalidBearer": "You didn't provide an API key. You can obtain an API key from §bhttps://platform.openai.com/account/api-keys§c.",
             "historyCleared": "The conversation history was successfully cleared!"
         }
     }
