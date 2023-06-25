@@ -21,7 +21,12 @@
             "gpt": {
                 "name": "ChatGPT Einstellungen",
                 "model": {
-                    "name": "Model"
+                    "name": "Model",
+                    "description": "Welches OpenAI Model du benutzen möchtest."
+                },
+                "behavior": {
+                    "name": "Verhaltensanweisung",
+                    "description": "Der Chatbot wird sich so verhalten, wie du es hier angibst."
                 }
             },
             "saveHistory": {

@@ -18,12 +18,12 @@ public class GPTRequest {
     private String output;
     private String error;
 
-    public GPTRequest(String query, String key, String username, String model) {
+    public GPTRequest(String query, String key, String username, String model, String behavior) {
         Gson gson = new Gson();
 
         try {
             if(GPTAddon.queryHistory.isEmpty())
-                GPTAddon.queryHistory.add(new GPTMessage("You are a helpful assistant.", GPTRole.System, "System"));
+                GPTAddon.queryHistory.add(new GPTMessage(behavior, GPTRole.System, "System"));
             GPTAddon.queryHistory.add(new GPTMessage(query, GPTRole.User, username));
             RequestBody apiRequestBody = new RequestBody(model, GPTAddon.queryHistory, username);
 

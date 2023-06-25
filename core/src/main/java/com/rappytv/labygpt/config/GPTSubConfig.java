@@ -1,6 +1,7 @@
 package com.rappytv.labygpt.config;
 
 import net.labymod.api.client.gui.screen.widget.Widget;
+import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
@@ -16,6 +17,8 @@ public class GPTSubConfig extends Config {
 
     @DropdownSetting
     private final ConfigProperty<String> model = new ConfigProperty<>(models[0]);
+    @TextFieldSetting
+    private final ConfigProperty<String> behavior = new ConfigProperty<>("You are a helpful assistant.");
 
     @SuppressWarnings("unchecked")
     @SettingListener(target = "model", type = EventType.INITIALIZE)
@@ -28,5 +31,8 @@ public class GPTSubConfig extends Config {
 
     public ConfigProperty<String> model() {
         return model;
+    }
+    public ConfigProperty<String> behavior() {
+        return behavior;
     }
 }
