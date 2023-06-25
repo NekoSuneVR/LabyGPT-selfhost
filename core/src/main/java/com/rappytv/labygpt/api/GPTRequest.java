@@ -18,14 +18,14 @@ public class GPTRequest {
     private String output;
     private String error;
 
-    public GPTRequest(String query, String key, String username) {
+    public GPTRequest(String query, String key, String username, String model) {
         Gson gson = new Gson();
 
         try {
             if(GPTAddon.queryHistory.isEmpty())
                 GPTAddon.queryHistory.add(new GPTMessage("You are a helpful assistant.", GPTRole.System, "System"));
             GPTAddon.queryHistory.add(new GPTMessage(query, GPTRole.User, username));
-            RequestBody apiRequestBody = new RequestBody("gpt-3.5-turbo", GPTAddon.queryHistory, username);
+            RequestBody apiRequestBody = new RequestBody(model, GPTAddon.queryHistory, username);
 
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI("https://api.openai.com/v1/chat/completions"))
