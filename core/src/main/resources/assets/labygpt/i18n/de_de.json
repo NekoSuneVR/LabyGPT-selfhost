@@ -18,6 +18,17 @@
                     "name": "Teile deinen Spielernamen mit OpenAI"
                 }
             },
+            "gpt": {
+                "name": "ChatGPT Einstellungen",
+                "model": {
+                    "name": "Model",
+                    "description": "Welches OpenAI Model du benutzen möchtest."
+                },
+                "behavior": {
+                    "name": "Verhaltensanweisung",
+                    "description": "Der Chatbot wird sich so verhalten, wie du es hier angibst."
+                }
+            },
             "saveHistory": {
                 "name": "Konversationsverlauf aktivieren",
                 "description": "Wenn diese Einstellung deaktiviert ist, ist jede Anfrage seine eigene Konversation und wird nicht von vorherigen Nachrichten beeinflusst. Du kannst den Konversationsverlauf auch mit §b/gpt history §feinsehen und mit §b/gpt clear §flöschen."

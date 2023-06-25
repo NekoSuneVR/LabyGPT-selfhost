@@ -36,7 +36,9 @@ public class GPTCommand extends Command {
         GPTRequest request = new GPTRequest(
             String.join(" ", arguments),
             addon.configuration().openAI().bearer(),
-            this.addon.configuration().openAI().shareUsername() ? labyAPI.getName() : ""
+            addon.configuration().openAI().shareUsername() ? labyAPI.getName() : "",
+            addon.configuration().gpt().model().get().toLowerCase(),
+            addon.configuration().gpt().behavior().get()
         );
 
         if(!request.isSuccessful() || request.getOutput() == null) {
