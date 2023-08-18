@@ -4,7 +4,8 @@ import com.rappytv.labygpt.GPTAddon;
 import com.rappytv.labygpt.api.GPTMessage;
 import com.rappytv.labygpt.api.GPTRole;
 import net.labymod.api.client.chat.command.SubCommand;
-import net.labymod.api.util.I18n;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
 
 public class GPTHistorySubCommand extends SubCommand {
 
@@ -15,20 +16,24 @@ public class GPTHistorySubCommand extends SubCommand {
     @Override
     public boolean execute(String prefix, String[] arguments) {
         if(GPTAddon.queryHistory.size() < 2) {
-            displayMessage(GPTAddon.prefix + "§c" + I18n.translate("labygpt.messages.emptyHistory"));
+            displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.translatable("labygpt.messages.emptyHistory", NamedTextColor.RED)));
             return true;
         }
 
-        StringBuilder builder = new StringBuilder();
+        Component component = Component.empty();
         for(int i = 0; i < GPTAddon.queryHistory.size(); i++) {
             GPTMessage message = GPTAddon.queryHistory.get(i);
             String name = message.name.isEmpty() ? labyAPI.getName() : message.name;
             if(message.role != GPTRole.System)
-                builder.append("§8[§9").append(name).append("§8] §f").append(message.content.replace("\n\n", "")).append("\n");
+                component
+                    .append(Component.text(i == 0 ? "" : "\n"))
+                    .append(Component.text("[", NamedTextColor.DARK_GRAY))
+                    .append(Component.text(name))
+                    .append(Component.text("] ", NamedTextColor.DARK_GRAY))
+                    .append(Component.text(message.content.replace("\n\n", ""), NamedTextColor.WHITE));
         }
-        String history = builder.toString();
 
-        displayMessage(history.substring(0, history.length() - 1));
+        displayMessage(component);
         return true;
     }
 }
