@@ -24,32 +24,41 @@ public class GPTCommand extends Command {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        if(addon.configuration().openAI().bearer().isEmpty()) {
-            displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.translatable("labygpt.messages.noKey", NamedTextColor.RED)));
+        if (addon.configuration().openAI().bearer().isEmpty()) {
+            displayMessage(Component.empty().append(GPTAddon.prefix)
+                .append(Component.translatable("labygpt.messages.noKey", NamedTextColor.RED)));
             return true;
         }
-        if(arguments.length < 1) {
-            displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.translatable("labygpt.messages.noQuery", NamedTextColor.RED)));
+        if (arguments.length < 1) {
+            displayMessage(Component.empty().append(GPTAddon.prefix)
+                .append(Component.translatable("labygpt.messages.noQuery", NamedTextColor.RED)));
             return true;
         }
 
-        if(!addon.configuration().saveHistory())
+        if (!addon.configuration().saveHistory()) {
             GPTAddon.queryHistory.clear();
-        GPTRequest request = new GPTRequest(
+        }
+        GPTRequest request = new GPTRequest();
+        request.sendRequestAsync(
             String.join(" ", arguments),
             addon.configuration().openAI().bearer(),
             addon.configuration().openAI().shareUsername() ? labyAPI.getName() : "",
             addon.configuration().gpt().model().get().toLowerCase(),
             addon.configuration().gpt().behavior().get()
-        );
+        ).thenRun(() -> {
+            // Callback logic when the request is done:
+            if (!request.isSuccessful() || request.getOutput() == null) {
+                GPTAddon.queryHistory.remove(GPTAddon.queryHistory.size() - 1);
+                displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.text(
+                    Objects.requireNonNullElseGet(request.getError(),
+                        () -> I18n.translate("labygpt.messages.requestError")),
+                    NamedTextColor.RED)));
+            } else {
+                displayMessage(Component.empty().append(GPTAddon.prefix)
+                    .append(Component.text(request.getOutput(), NamedTextColor.WHITE)));
+            }
+        });
 
-        if(!request.isSuccessful() || request.getOutput() == null) {
-            GPTAddon.queryHistory.remove(GPTAddon.queryHistory.size() - 1);
-            displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.text(Objects.requireNonNullElseGet(request.getError(), () -> I18n.translate("labygpt.messages.requestError")), NamedTextColor.RED)));
-            return true;
-        }
-
-        displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.text(request.getOutput(), NamedTextColor.WHITE)));
         return true;
     }
 }

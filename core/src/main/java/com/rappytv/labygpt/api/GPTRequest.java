@@ -3,14 +3,12 @@ package com.rappytv.labygpt.api;
 import com.google.gson.Gson;
 import com.rappytv.labygpt.GPTAddon;
 import net.labymod.api.util.I18n;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.concurrent.CompletableFuture;
 
 public class GPTRequest {
 
@@ -18,12 +16,15 @@ public class GPTRequest {
     private String output;
     private String error;
 
-    public GPTRequest(String query, String key, String username, String model, String behavior) {
+    public CompletableFuture<Void> sendRequestAsync(String query, String key, String username,
+        String model, String behavior) {
         Gson gson = new Gson();
+        CompletableFuture<Void> future = new CompletableFuture<>();
 
         try {
-            if(GPTAddon.queryHistory.isEmpty())
+            if (GPTAddon.queryHistory.isEmpty()) {
                 GPTAddon.queryHistory.add(new GPTMessage(behavior, GPTRole.System, "System"));
+            }
             GPTAddon.queryHistory.add(new GPTMessage(query, GPTRole.User, username));
             RequestBody apiRequestBody = new RequestBody(model, GPTAddon.queryHistory, username);
 
@@ -35,38 +36,44 @@ public class GPTRequest {
                 .build();
 
             HttpClient client = HttpClient.newHttpClient();
-            HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+            client.sendAsync(request, BodyHandlers.ofString())
+                .thenAccept(response -> {
+                    ResponseBody responseBody = gson.fromJson(response.body(), ResponseBody.class);
 
-            ResponseBody responseBody = gson.fromJson(response.body(), ResponseBody.class);
+                    if (responseBody.error != null) {
+                        error = responseBody.error.message;
+                        if (error.isEmpty() && responseBody.error.code.equals("invalid_api_key")) {
+                            error = I18n.translate("labygpt.messages.invalidBearer");
+                        }
+                        successful = false;
+                    } else if (responseBody.choices.isEmpty()) {
+                        successful = false;
+                    } else {
+                        GPTMessage message = responseBody.choices.get(0).message;
+                        output = message.content.replace("\n\n", "");
+                        GPTAddon.queryHistory.add(
+                            new GPTMessage(message.content, GPTRole.Assistant, "LabyGPT"));
+                        successful = true;
+                    }
 
-            if(responseBody.error != null) {
-                error = responseBody.error.message;
-                if(error.isEmpty() && responseBody.error.code.equals("invalid_api_key"))
-                    error = I18n.translate("labygpt.messages.invalidBearer");
-                successful = false;
-                return;
-            }
-            if(responseBody.choices.size() < 1) {
-                successful = false;
-                return;
-            }
-
-            GPTMessage message = responseBody.choices.get(0).message;
-            output = message.content.replace("\n\n", "");
-            GPTAddon.queryHistory.add(new GPTMessage(message.content, GPTRole.Assistant, "LabyGPT"));
-            successful = true;
-        } catch (IOException | InterruptedException | URISyntaxException e) {
+                    future.complete(null);
+                });
+        } catch (Exception e) {
             e.printStackTrace();
-            successful = false;
+            future.completeExceptionally(e);
         }
+
+        return future;
     }
 
     public boolean isSuccessful() {
         return successful;
     }
+
     public String getOutput() {
         return output;
     }
+
     public String getError() {
         return error;
     }
