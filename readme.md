@@ -1,4 +1,5 @@
 # **LabyGPT**
+![Downloads](https://img.shields.io/endpoint?url=https://labybadges-delta.vercel.app/api/downloads/labygpt/formatted)<br>
 Communicate with ChatGPT right in your Chat.<br>Powered by [OpenAI](https://openai.com).
 
 ### Installation
