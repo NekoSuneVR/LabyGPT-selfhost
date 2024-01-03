@@ -21,7 +21,7 @@ labyMod {
         author = "RappyTV"
         description = "Communicate with ChatGPT right in your Chat. Powered by OpenAI."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "1.1.1")
+        version = System.getenv().getOrDefault("VERSION", "1.1.2")
     }
 
     minecraft {
