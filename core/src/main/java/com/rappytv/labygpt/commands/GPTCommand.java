@@ -57,6 +57,10 @@ public class GPTCommand extends Command {
                 displayMessage(Component.empty().append(GPTAddon.prefix)
                     .append(Component.text(request.getOutput(), NamedTextColor.WHITE)));
             }
+        }).exceptionally((e) -> {
+            displayMessage(Component.empty().append(GPTAddon.prefix)
+                .append(Component.text(e.getMessage(), NamedTextColor.RED)));
+            return null;
         });
 
         return true;

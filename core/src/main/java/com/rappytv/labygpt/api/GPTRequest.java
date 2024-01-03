@@ -57,10 +57,15 @@ public class GPTRequest {
                     }
 
                     future.complete(null);
+                }).exceptionally((e) -> {
+                    future.completeExceptionally(e);
+                    error = e.getMessage();
+                    return null;
                 });
         } catch (Exception e) {
             e.printStackTrace();
             future.completeExceptionally(e);
+            error = e.getMessage();
         }
 
         return future;
