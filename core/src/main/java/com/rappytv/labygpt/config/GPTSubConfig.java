@@ -5,6 +5,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.Te
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
+import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingListener;
@@ -14,6 +15,7 @@ import java.util.Collections;
 
 public class GPTSubConfig extends Config {
 
+    @Exclude
     private final String[] models = new String[]{"GPT-3.5-Turbo", "GPT-3.5-Turbo-16k", "GPT-4", "GPT-4-32k"};
 
     @DropdownSetting
