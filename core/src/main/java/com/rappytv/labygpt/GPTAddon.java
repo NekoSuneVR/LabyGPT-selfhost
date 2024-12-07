@@ -1,7 +1,7 @@
 package com.rappytv.labygpt;
 
 import com.rappytv.labygpt.api.GPTMessage;
-import com.rappytv.labygpt.commands.GPTCommand;
+import com.rappytv.labygpt.command.GPTCommand;
 import com.rappytv.labygpt.config.GPTAddonConfig;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
