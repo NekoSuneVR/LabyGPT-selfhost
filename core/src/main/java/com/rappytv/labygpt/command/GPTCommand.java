@@ -2,8 +2,8 @@ package com.rappytv.labygpt.command;
 
 import com.rappytv.labygpt.GPTAddon;
 import com.rappytv.labygpt.api.GPTMessage;
+import com.rappytv.labygpt.api.GPTMessage.GPTRole;
 import com.rappytv.labygpt.api.GPTRequest;
-import com.rappytv.labygpt.api.GPTRole;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -39,30 +39,32 @@ public class GPTCommand extends Command {
         if (!addon.configuration().saveHistory()) {
             GPTAddon.queryHistory.clear();
         }
-        GPTRequest request = new GPTRequest();
-        request.sendRequestAsync(
+        GPTRequest.sendRequestAsync(
             String.join(" ", arguments),
             addon.configuration().openAI().bearer(),
             addon.configuration().openAI().shareUsername() ? labyAPI.getName() : "",
             addon.configuration().gpt().model().get().toLowerCase(),
-            addon.configuration().gpt().behavior().get()
-        ).thenRun(() -> {
-            // Callback logic when the request is done:
-            if (!request.isSuccessful() || request.getOutput() == null) {
-                GPTAddon.queryHistory.removeLast();
-                displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.text(
-                    Objects.requireNonNullElseGet(request.getError(),
-                        () -> I18n.translate("labygpt.messages.requestError")),
-                    NamedTextColor.RED)));
-            } else {
-                displayMessage(Component.empty().append(GPTAddon.prefix)
-                    .append(Component.text(request.getOutput(), NamedTextColor.WHITE)));
+            addon.configuration().gpt().behavior().get(),
+            (response) -> {
+                if (!response.successful() || response.output() == null) {
+                    GPTAddon.queryHistory.removeLast();
+                    displayMessage(
+                        Component.empty()
+                            .append(GPTAddon.prefix)
+                            .append(Component.text(
+                                Objects.requireNonNullElse(
+                                    response.error(),
+                                    I18n.translate("labygpt.messages.requestError")
+                                ),
+                                NamedTextColor.RED
+                            ))
+                    );
+                } else {
+                    displayMessage(Component.empty().append(GPTAddon.prefix)
+                        .append(Component.text(response.output(), NamedTextColor.WHITE)));
+                }
             }
-        }).exceptionally((e) -> {
-            displayMessage(Component.empty().append(GPTAddon.prefix)
-                .append(Component.text(e.getMessage(), NamedTextColor.RED)));
-            return null;
-        });
+        );
 
         return true;
     }
