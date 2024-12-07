@@ -1,29 +1,30 @@
 package com.rappytv.labygpt.api;
 
 import com.google.gson.Gson;
-import com.rappytv.labygpt.GPTAddon;
 import com.rappytv.labygpt.api.GPTMessage.GPTRole;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Request;
 import net.labymod.api.util.io.web.request.Request.Method;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public class GPTRequest {
 
     private final static Gson gson = new Gson();
+    public static final ArrayList<GPTMessage> queryHistory = new ArrayList<>();
 
     public static void sendRequestAsync(String query, String key, String username,
         String model, String behavior, Consumer<ApiResponse> responseConsumer) {
 
-        if(GPTAddon.queryHistory.isEmpty()) {
-            GPTAddon.queryHistory.add(new GPTMessage(behavior, GPTRole.System, "System"));
+        if(queryHistory.isEmpty()) {
+            queryHistory.add(new GPTMessage(behavior, GPTRole.System, "System"));
         }
-        GPTAddon.queryHistory.add(new GPTMessage(query, GPTRole.User, username));
+        queryHistory.add(new GPTMessage(query, GPTRole.User, username));
 
         Map<String, String> body = Map.of(
             "model", model,
-            "messages", gson.toJson(GPTAddon.queryHistory),
+            "messages", gson.toJson(queryHistory),
             "user", username
         );
 
@@ -55,7 +56,7 @@ public class GPTRequest {
                 } else {
                     GPTMessage message = responseBody.choices.getFirst().message;
                     output = message.content.replace("\n\n", "");
-                    GPTAddon.queryHistory.add(new GPTMessage(output, GPTRole.Assistant, username));
+                    queryHistory.add(new GPTMessage(output, GPTRole.Assistant, username));
                     successful = true;
                 }
                 responseConsumer.accept(new ApiResponse(successful, output, error));

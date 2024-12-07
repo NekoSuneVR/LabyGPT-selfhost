@@ -1,6 +1,6 @@
-package com.rappytv.labygpt.command;
+package com.rappytv.labygpt.core.command;
 
-import com.rappytv.labygpt.GPTAddon;
+import com.rappytv.labygpt.core.GPTAddon;
 import com.rappytv.labygpt.api.GPTMessage;
 import com.rappytv.labygpt.api.GPTMessage.GPTRole;
 import com.rappytv.labygpt.api.GPTRequest;
@@ -37,7 +37,7 @@ public class GPTCommand extends Command {
         }
 
         if (!addon.configuration().saveHistory()) {
-            GPTAddon.queryHistory.clear();
+            GPTRequest.queryHistory.clear();
         }
         GPTRequest.sendRequestAsync(
             String.join(" ", arguments),
@@ -47,7 +47,7 @@ public class GPTCommand extends Command {
             addon.configuration().gpt().behavior().get(),
             (response) -> {
                 if (!response.successful() || response.output() == null) {
-                    GPTAddon.queryHistory.removeLast();
+                    GPTRequest.queryHistory.removeLast();
                     displayMessage(
                         Component.empty()
                             .append(GPTAddon.prefix)
@@ -77,11 +77,11 @@ public class GPTCommand extends Command {
 
         @Override
         public boolean execute(String prefix, String[] arguments) {
-            if(GPTAddon.queryHistory.isEmpty()) {
+            if(GPTRequest.queryHistory.isEmpty()) {
                 displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.translatable("labygpt.messages.alreadyEmptyHistory", NamedTextColor.RED)));
                 return true;
             }
-            GPTAddon.queryHistory.clear();
+            GPTRequest.queryHistory.clear();
             displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.translatable("labygpt.messages.historyCleared", NamedTextColor.GREEN)));
             return true;
         }
@@ -95,14 +95,14 @@ public class GPTCommand extends Command {
 
         @Override
         public boolean execute(String prefix, String[] arguments) {
-            if(GPTAddon.queryHistory.size() < 2) {
+            if(GPTRequest.queryHistory.size() < 2) {
                 displayMessage(Component.empty().append(GPTAddon.prefix).append(Component.translatable("labygpt.messages.emptyHistory", NamedTextColor.RED)));
                 return true;
             }
 
             Component component = Component.empty();
-            for(int i = 0; i < GPTAddon.queryHistory.size(); i++) {
-                GPTMessage message = GPTAddon.queryHistory.get(i);
+            for(int i = 0; i < GPTRequest.queryHistory.size(); i++) {
+                GPTMessage message = GPTRequest.queryHistory.get(i);
                 String name = message.name.isEmpty() ? labyAPI.getName() : message.name;
                 if(message.role != GPTRole.System)
                     component

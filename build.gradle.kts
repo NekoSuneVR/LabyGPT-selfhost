@@ -9,7 +9,7 @@ group = "org.example"
 version = providers.environmentVariable("VERSION").getOrElse("1.1.3")
 
 labyMod {
-    defaultPackageName = "com.rappytv.labygpt"
+    defaultPackageName = "com.rappytv.labygpt.core"
     addonInfo {
         namespace = "labygpt"
         displayName = "LabyGPT"
@@ -23,8 +23,7 @@ labyMod {
         registerVersion(versions.toTypedArray()) {
             runs {
                 getByName("client") {
-                    // When the property is set to true, you can log in with a Minecraft account
-                    // devLogin = true
+                    devLogin = true
                 }
             }
         }

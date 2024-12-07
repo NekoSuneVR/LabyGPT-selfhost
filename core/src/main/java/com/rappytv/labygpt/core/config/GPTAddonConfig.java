@@ -1,4 +1,4 @@
-package com.rappytv.labygpt.config;
+package com.rappytv.labygpt.core.config;
 
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;

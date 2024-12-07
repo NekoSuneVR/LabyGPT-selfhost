@@ -1,6 +1,6 @@
-package com.rappytv.labygpt.config;
+package com.rappytv.labygpt.core.config;
 
-import com.rappytv.labygpt.GPTAddon;
+import com.rappytv.labygpt.core.GPTAddon;
 import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget;
