@@ -1,11 +1,11 @@
 package com.rappytv.labygpt.config;
 
+import com.rappytv.labygpt.GPTAddon;
 import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
-import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingListener;
@@ -15,12 +15,9 @@ import java.util.Collections;
 
 public class GPTSubConfig extends Config {
 
-    @Exclude
-    private final String[] models = new String[]{"gpt-3.5-turbo", "gpt-4-turbo", "gpt-4", "chatgpt-4o-latest", "gpt-4o", "gpt-4o-mini"};
-
     @DropdownSetting
     @SpriteSlot(size = 32, x = 1)
-    private final ConfigProperty<String> model = new ConfigProperty<>(models[0]);
+    private final ConfigProperty<String> model = new ConfigProperty<>(GPTAddon.models[0]);
     @TextFieldSetting
     @SpriteSlot(size = 32, x = 1, y = 1)
     private final ConfigProperty<String> behavior = new ConfigProperty<>("You are a helpful assistant.");
@@ -29,7 +26,7 @@ public class GPTSubConfig extends Config {
     @SettingListener(target = "model", type = EventType.INITIALIZE)
     public void initialize(SettingElement setting) {
         DropdownWidget<String> widget = (DropdownWidget<String>) setting.asElement().getWidgets()[0];
-        widget.addAll(models);
+        widget.addAll(GPTAddon.models);
         setting.setWidgets(Collections.singletonList(widget)
             .toArray(new Widget[0]));
     }

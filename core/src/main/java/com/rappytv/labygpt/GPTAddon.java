@@ -16,6 +16,7 @@ public class GPTAddon extends LabyAddon<GPTAddonConfig> {
         .append(Component.text("LabyGPT", NamedTextColor.BLUE))
         .append(Component.text("] ", NamedTextColor.DARK_GRAY));
     public static final ArrayList<GPTMessage> queryHistory = new ArrayList<>();
+    public static final String[] models = new String[]{"gpt-3.5-turbo", "gpt-4-turbo", "gpt-4", "chatgpt-4o-latest", "gpt-4o", "gpt-4o-mini"};
 
     @Override
     protected void enable() {

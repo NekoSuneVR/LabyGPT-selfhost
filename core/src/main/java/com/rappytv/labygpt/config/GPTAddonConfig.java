@@ -14,13 +14,13 @@ public class GPTAddonConfig extends AddonConfig {
     @SwitchSetting
     @SpriteSlot(size = 32)
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
+    @SwitchSetting
+    @SpriteSlot(size = 32, x = 2, y = 1)
+    private final ConfigProperty<Boolean> saveHistory = new ConfigProperty<>(true);
     @SpriteSlot(size = 32, x = 1)
     private final OpenAISubConfig openAI = new OpenAISubConfig();
     @SpriteSlot(size = 32, x = 1)
     private final GPTSubConfig gpt = new GPTSubConfig();
-    @SwitchSetting
-    @SpriteSlot(size = 32, x = 2, y = 1)
-    private final ConfigProperty<Boolean> saveHistory = new ConfigProperty<>(true);
 
     @Override
     public ConfigProperty<Boolean> enabled() {
