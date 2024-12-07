@@ -16,7 +16,7 @@ import java.util.Collections;
 public class GPTSubConfig extends Config {
 
     @Exclude
-    private final String[] models = new String[]{"GPT-3.5-Turbo", "GPT-3.5-Turbo-16k", "GPT-4", "GPT-4-32k"};
+    private final String[] models = new String[]{"gpt-3.5-turbo", "gpt-4-turbo", "gpt-4", "chatgpt-4o-latest", "gpt-4o", "gpt-4o-mini"};
 
     @DropdownSetting
     @SpriteSlot(size = 32, x = 1)
