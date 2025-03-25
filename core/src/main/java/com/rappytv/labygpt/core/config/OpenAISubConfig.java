@@ -12,9 +12,19 @@ import net.labymod.api.util.MethodOrder;
 
 public class OpenAISubConfig extends Config {
 
+    // Define the URL for OpenAI and self-hosted AI
+    @TextFieldSetting
+    @SpriteSlot(size = 32, x = 2)
+    private final ConfigProperty<String> openAIUrl = new ConfigProperty<>("https://api.openai.com/v1");
+    
+    @TextFieldSetting
+    @SpriteSlot(size = 32, x = 2)
+    private final ConfigProperty<String> selfHostUrl = new ConfigProperty<>("http://localhost:5000/v1"); // Example for self-hosted AI
+    
     @TextFieldSetting
     @SpriteSlot(size = 32, x = 2)
     private final ConfigProperty<String> bearer = new ConfigProperty<>("");
+    
     @SwitchSetting
     @SpriteSlot(size = 32, x = 3)
     private final ConfigProperty<Boolean> shareUsername = new ConfigProperty<>(true);
@@ -26,10 +36,18 @@ public class OpenAISubConfig extends Config {
         Laby.labyAPI().minecraft().chatExecutor().openUrl("https://platform.openai.com/account/api-keys");
     }
 
+    public String apiurl() {
+        // Toggle the URL based on the switch
+        return useOpenAI.get() ? openAIUrl.get() : selfHostUrl.get();
+    }
+    
     public String bearer() {
         return bearer.get();
     }
     public Boolean shareUsername() {
         return shareUsername.get();
+    }
+    public Boolean useOpenAI() {
+        return useOpenAI.get();
     }
 }
