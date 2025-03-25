@@ -2,7 +2,6 @@ package com.rappytv.labygpt.api;
 
 import com.google.gson.Gson;
 import com.rappytv.labygpt.api.GPTMessage.GPTRole;
-import com.rappytv.labygpt.core.config;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Request;
 import net.labymod.api.util.io.web.request.Request.Method;
@@ -15,14 +14,8 @@ public class GPTRequest {
     private final static Gson gson = new Gson();
     public static final ArrayList<GPTMessage> queryHistory = new ArrayList<>();
 
-    // Instance of OpenAISubConfig to get configuration
-    private static OpenAISubConfig config = new OpenAISubConfig();
-
-    public static void sendRequestAsync(String query, String key, String username,
+    public static void sendRequestAsync(String query, String apiurl, String key, String username,
                                         String model, String behavior, Consumer<ApiResponse> responseConsumer) {
-
-        // Select API URL based on the OpenAI toggle in the config
-        String apiurl = config.apiurl();
 
         // Ensure the query history starts with a system message if it's empty
         if(queryHistory.isEmpty()) {
