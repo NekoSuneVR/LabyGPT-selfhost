@@ -11,7 +11,7 @@ import net.labymod.api.models.addon.annotation.AddonMain;
 public class GPTAddon extends LabyAddon<GPTAddonConfig> {
 
     public static final Component prefix = Component.text("[", NamedTextColor.DARK_GRAY)
-        .append(Component.text("LabyGPT", NamedTextColor.BLUE))
+        .append(Component.text("LabyGPT Selfhost", NamedTextColor.BLUE))
         .append(Component.text("] ", NamedTextColor.DARK_GRAY));
     public static final String[] models = new String[]{"mistral:7b", "deepseek-llm:7b"};
 
