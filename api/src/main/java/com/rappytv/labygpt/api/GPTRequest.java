@@ -24,8 +24,7 @@ public class GPTRequest {
 
         Map<String, String> body = Map.of(
             "model", model,
-            "messages", gson.toJson(queryHistory),
-            "user", username
+            "messages", gson.toJson(queryHistory)
         );
 
         Request.ofGson(ResponseBody.class)
