@@ -28,6 +28,7 @@ public class OpenAISubConfig extends Config {
     @SwitchSetting
     @SpriteSlot(size = 32, x = 3)
     private final ConfigProperty<Boolean> shareUsername = new ConfigProperty<>(true);
+    private final ConfigProperty<Boolean> useOpenAI = new ConfigProperty<>(true); // Toggle between OpenAI and Self-Host
 
     @MethodOrder(after = "bearer")
     @ButtonSetting
@@ -48,6 +49,6 @@ public class OpenAISubConfig extends Config {
         return shareUsername.get();
     }
     public Boolean useOpenAI() {
-        return openAIUrl.get();
+        return useOpenAI.get();
     }
 }
