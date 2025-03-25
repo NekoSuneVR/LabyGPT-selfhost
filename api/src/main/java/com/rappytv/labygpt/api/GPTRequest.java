@@ -2,6 +2,7 @@ package com.rappytv.labygpt.api;
 
 import com.google.gson.Gson;
 import com.rappytv.labygpt.api.GPTMessage.GPTRole;
+import com.rappytv.labygpt.core.config.OpenAISubConfig;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Request;
 import net.labymod.api.util.io.web.request.Request.Method;
@@ -14,9 +15,16 @@ public class GPTRequest {
     private final static Gson gson = new Gson();
     public static final ArrayList<GPTMessage> queryHistory = new ArrayList<>();
 
-    public static void sendRequestAsync(String query, String key, String username,
-        String model, String behavior, Consumer<ApiResponse> responseConsumer) {
+    // Instance of OpenAISubConfig to get configuration
+    private static OpenAISubConfig config = new OpenAISubConfig();
 
+    public static void sendRequestAsync(String query, String key, String username,
+                                        String model, String behavior, Consumer<ApiResponse> responseConsumer) {
+
+        // Select API URL based on the OpenAI toggle in the config
+        String apiurl = config.apiurl();
+
+        // Ensure the query history starts with a system message if it's empty
         if(queryHistory.isEmpty()) {
             queryHistory.add(new GPTMessage(behavior, GPTRole.System, "System"));
         }
@@ -27,8 +35,9 @@ public class GPTRequest {
             "messages", gson.toJson(queryHistory)
         );
 
+        // Perform the async API request to OpenAI or self-hosted based on the config
         Request.ofGson(ResponseBody.class)
-            .url("https://openai.nekosunevr.co.uk/v1/chat/completions")
+            .url(apiurl + "/chat/completions")
             .method(Method.POST)
             .addHeader("Content-Type", "application/json")
             .addHeader("Authorization", "Bearer " + key)
