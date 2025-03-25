@@ -1,4 +1,4 @@
-rootProject.name = "labygpt"
+rootProject.name = "labygpt-selfhost"
 
 pluginManagement {
     val labyGradlePluginVersion = "0.5.3"
