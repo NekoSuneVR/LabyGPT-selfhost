@@ -1,6 +1,6 @@
-package com.rappytv.labygpt.core.config;
+package com.nekosunevr.labygpt-selfhost.core.config;
 
-import com.rappytv.labygpt.core.GPTAddon;
+import com.nekosunevr.labygpt-selfhost.core.GPTAddon;
 import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget;

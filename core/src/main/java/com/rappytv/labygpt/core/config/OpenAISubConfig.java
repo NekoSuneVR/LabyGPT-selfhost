@@ -1,4 +1,4 @@
-package com.rappytv.labygpt.core.config;
+package com.nekosunevr.labygpt-selfhost.core.config;
 
 import net.labymod.api.Laby;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;

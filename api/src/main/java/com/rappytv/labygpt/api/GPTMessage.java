@@ -1,4 +1,4 @@
-package com.rappytv.labygpt.api;
+package com.nekosunevr.labygpt-selfhost.api;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,7 +1,7 @@
-package com.rappytv.labygpt.api;
+package com.nekosunevr.labygpt-selfhost.api;
 
 import com.google.gson.Gson;
-import com.rappytv.labygpt.api.GPTMessage.GPTRole;
+import com.nekosunevr.labygpt-selfhost.api.GPTMessage.GPTRole;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Request;
 import net.labymod.api.util.io.web.request.Request.Method;

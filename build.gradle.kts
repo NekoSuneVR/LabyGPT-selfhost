@@ -9,11 +9,11 @@ group = "org.example"
 version = providers.environmentVariable("VERSION").getOrElse("1.1.4")
 
 labyMod {
-    defaultPackageName = "com.rappytv.labygpt.core"
+    defaultPackageName = "com.nekosunevr.labygpt-selfhost.core"
     addonInfo {
         namespace = "labygpt-selfhost"
         displayName = "LabyGPT Selfhost"
-        author = "RappyTV"
+        author = "NekoSuneVR"
         description = "Communicate with ChatGPT right in your Chat. Powered by OpenAI Selfhost."
         minecraftVersion = "*"
         version = rootProject.version.toString()

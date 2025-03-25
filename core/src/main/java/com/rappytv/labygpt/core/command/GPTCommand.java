@@ -1,9 +1,9 @@
-package com.rappytv.labygpt.core.command;
+package com.nekosunevr.labygpt-selfhost.core.command;
 
-import com.rappytv.labygpt.core.GPTAddon;
-import com.rappytv.labygpt.api.GPTMessage;
-import com.rappytv.labygpt.api.GPTMessage.GPTRole;
-import com.rappytv.labygpt.api.GPTRequest;
+import com.nekosunevr.labygpt-selfhost.core.GPTAddon;
+import com.nekosunevr.labygpt-selfhost.api.GPTMessage;
+import com.nekosunevr.labygpt-selfhost.api.GPTMessage.GPTRole;
+import com.nekosunevr.labygpt-selfhost.api.GPTRequest;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;

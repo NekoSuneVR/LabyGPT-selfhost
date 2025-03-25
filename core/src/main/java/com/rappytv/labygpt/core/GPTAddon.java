@@ -1,7 +1,7 @@
-package com.rappytv.labygpt.core;
+package com.nekosunevr.labygpt-selfhost.core;
 
-import com.rappytv.labygpt.core.command.GPTCommand;
-import com.rappytv.labygpt.core.config.GPTAddonConfig;
+import com.nekosunevr.labygpt-selfhost.core.command.GPTCommand;
+import com.nekosunevr.labygpt-selfhost.core.config.GPTAddonConfig;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
