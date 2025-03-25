@@ -29,7 +29,7 @@ public class GPTRequest {
         );
 
         Request.ofGson(ResponseBody.class)
-            .url("https://api.openai.com/v1/chat/completions")
+            .url("https://openai.nekosunevr.co.uk/v1/chat/completions")
             .method(Method.POST)
             .addHeader("Content-Type", "application/json")
             .addHeader("Authorization", "Bearer " + key)
