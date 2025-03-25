@@ -13,7 +13,7 @@ public class GPTAddon extends LabyAddon<GPTAddonConfig> {
     public static final Component prefix = Component.text("[", NamedTextColor.DARK_GRAY)
         .append(Component.text("LabyGPT", NamedTextColor.BLUE))
         .append(Component.text("] ", NamedTextColor.DARK_GRAY));
-    public static final String[] models = new String[]{"gpt-3.5-turbo", "gpt-4-turbo", "gpt-4", "chatgpt-4o-latest", "gpt-4o", "gpt-4o-mini"};
+    public static final String[] models = new String[]{"mistral:7b", "deepseek-llm:7b"};
 
     @Override
     protected void enable() {
