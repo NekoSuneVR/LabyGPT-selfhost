@@ -10,7 +10,6 @@ public class GPTMessage {
     public GPTMessage(String content, GPTRole role, String name) {
         this.content = content;
         this.role = role;
-        this.name = name;
     }
 
     public enum GPTRole {
