@@ -28,6 +28,9 @@ public class OpenAISubConfig extends Config {
     @SwitchSetting
     @SpriteSlot(size = 32, x = 3)
     private final ConfigProperty<Boolean> shareUsername = new ConfigProperty<>(true);
+
+    @SwitchSetting
+    @SpriteSlot(size = 32, x = 3)
     private final ConfigProperty<Boolean> useOpenAI = new ConfigProperty<>(true); // Toggle between OpenAI and Self-Host
 
     @MethodOrder(after = "bearer")
