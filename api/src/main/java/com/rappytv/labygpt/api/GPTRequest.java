@@ -2,7 +2,7 @@ package com.rappytv.labygpt.api;
 
 import com.google.gson.Gson;
 import com.rappytv.labygpt.api.GPTMessage.GPTRole;
-import com.rappytv.labygpt.core.config.OpenAISubConfig;
+import com.rappytv.labygpt.core.config;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Request;
 import net.labymod.api.util.io.web.request.Request.Method;
