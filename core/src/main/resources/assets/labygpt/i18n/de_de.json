@@ -1,7 +1,7 @@
 {
-    "labygpt": {
+    "labygpt-selfhost": {
         "settings": {
-            "name": "LabyGPT",
+            "name": "LabyGPT Selfhost",
             "enabled": {
                 "name": "Aktiviert"
             },
@@ -16,6 +16,9 @@
                 },
                 "shareUsername": {
                     "name": "Teile deinen Spielernamen mit OpenAI"
+                },
+                "useOpenAI": {
+                    "name": "Use Default OpenAI"
                 }
             },
             "gpt": {

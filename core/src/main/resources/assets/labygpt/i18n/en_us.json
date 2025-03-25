@@ -1,7 +1,7 @@
 {
-    "labygpt": {
+    "labygpt-selfhost": {
         "settings": {
-            "name": "LabyGPT",
+            "name": "LabyGPT Selfhost",
             "enabled": {
                 "name": "Enabled"
             },
@@ -16,6 +16,9 @@
                 },
                 "shareUsername": {
                     "name": "Share your Username with OpenAI"
+                },
+                "useOpenAI": {
+                    "name": "Use Default OpenAI"
                 }
             },
             "gpt": {
