@@ -48,6 +48,6 @@ public class OpenAISubConfig extends Config {
         return shareUsername.get();
     }
     public Boolean useOpenAI() {
-        return useOpenAI.get();
+        return openAIUrl.get();
     }
 }
