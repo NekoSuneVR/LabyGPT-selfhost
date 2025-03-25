@@ -1,5 +1,5 @@
 {
-    "labygpt-selfhost": {
+    "labygpt": {
         "settings": {
             "name": "LabyGPT Selfhost",
             "enabled": {
@@ -7,6 +7,12 @@
             },
             "openAI": {
                 "name": "OpenAI Settings",
+                "openAIUrl": {
+                    "name": "OpenAI Url"
+                },
+                "selfHostUrl": {
+                    "name": "SelfHost OpenAI Url"
+                },
                 "bearer": {
                     "name": "OpenAI API Key"
                 },

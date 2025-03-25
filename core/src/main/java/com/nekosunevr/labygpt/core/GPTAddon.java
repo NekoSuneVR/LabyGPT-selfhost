@@ -1,7 +1,7 @@
-package com.nekosunevr.labygpt-selfhost.core;
+package com.nekosunevr.labygpt.core;
 
-import com.nekosunevr.labygpt-selfhost.core.command.GPTCommand;
-import com.nekosunevr.labygpt-selfhost.core.config.GPTAddonConfig;
+import com.nekosunevr.labygpt.core.command.GPTCommand;
+import com.nekosunevr.labygpt.core.config.GPTAddonConfig;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;

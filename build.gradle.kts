@@ -9,9 +9,9 @@ group = "org.example"
 version = providers.environmentVariable("VERSION").getOrElse("1.1.4")
 
 labyMod {
-    defaultPackageName = "com.nekosunevr.labygpt-selfhost.core"
+    defaultPackageName = "com.nekosunevr.labygpt.core"
     addonInfo {
-        namespace = "labygpt-selfhost"
+        namespace = "labygpt"
         displayName = "LabyGPT Selfhost"
         author = "NekoSuneVR"
         description = "Communicate with ChatGPT right in your Chat. Powered by OpenAI Selfhost."

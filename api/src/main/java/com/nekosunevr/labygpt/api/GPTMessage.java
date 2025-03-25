@@ -1,4 +1,4 @@
-package com.nekosunevr.labygpt-selfhost.api;
+package com.nekosunevr.labygpt.api;
 
 import com.google.gson.annotations.SerializedName;
 
